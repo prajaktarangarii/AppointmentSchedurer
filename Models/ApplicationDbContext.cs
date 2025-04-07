@@ -13,6 +13,7 @@ namespace AppointmentSchedurer.Models
             : base(options)
         {
         }
+        public DbSet<Appointment> Appointments { get; set; }
 
     }
 }

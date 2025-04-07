@@ -1,7 +1,15 @@
 ﻿@model AppointmentSchedurer.Models.ViewModels.RegisterViewModel
 <h2>Sign Up</h2>
 <form method="post" asp-action="Register" asp-controller="Account">
-    <h4>Create A new account.</h4>
+    @if(User.IsInRole(AppointmentScheduler.Utility.Helper.Admin))
+    {
+        <h4>Register and Admin Account</h4>
+
+    }
+    else
+    {
+        <h4>Create A new account.</h4>
+    }
     <hr/>
 @*     <div asp-validation-summary="All" class="text-danger"></div>
  *@
@@ -41,7 +49,7 @@
         <label class="col-md-2" asp-for="RoleName"></label>
         <div class="col-md-10">
 @*             <select asp-for="RoleName" asp-item="@AppointmentScheduler.Utility.Helper.GetRolesForDropDown()" class=" from-control"></select>
- *@            <select asp-for="RoleName" asp-items="@(new SelectList(AppointmentScheduler.Utility.Helper.GetRolesForDropDown(), "Value", "Text"))" class="form-control"></select>
+            *@            <select asp-for="RoleName" asp-items="@(new SelectList(AppointmentScheduler.Utility.Helper.GetRolesForDropDown(User.IsInRole(AppointmentScheduler.Utility.Helper.Admin)), "Value", "Text"))" class="form-control"></select>
             <span asp-validation-for="RoleName" class=" text-danger"></span>
         </div>
     </div>
